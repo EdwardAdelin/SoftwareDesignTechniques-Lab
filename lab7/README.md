@@ -75,49 +75,7 @@ The gateway forwards requests to backend services. Common routes (examples):
 - `/grades` -> `grading-service`
 
 Note: the gateway routes are configured in the gateway's `application.properties`.
-
-## Example requests (Postman / curl)
-Base URL: `http://localhost:8080`
-
-- List students
-  - GET `/students`
-  - curl:
-    ```bash
-    curl http://localhost:8080/students
-    ```
-
-- Get student by id
-  - GET `/students/{id}`
-  - curl:
-    ```bash
-    curl http://localhost:8080/students/1
-    ```
-
-- Create student
-  - POST `/students`
-  - Headers: `Content-Type: application/json`
-  - Body example:
-    ```json
-    {
-      "firstName": "Alice",
-      "lastName": "Smith",
-      "email": "alice@example.com",
-      "address": "123 Main St"
-    }
-    ```
-  - curl:
-    ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"firstName":"Alice","lastName":"Smith","email":"alice@example.com","address":"123 Main St"}' http://localhost:8080/students
-    ```
-
-- Student report-card (calls grading service)
-  - GET `/students/{id}/report-card`
-  - curl:
-    ```bash
-    curl http://localhost:8080/students/1/report-card
-    ```
-
-Use Postman: create a collection, set environment variable `baseUrl = http://localhost:8080`, then add requests using the paths above.
+ above.
 
 ## Running services locally (without Docker)
 You can run any service from its module folder with Maven. Example for student-service:
@@ -173,14 +131,3 @@ Eureka health checks rely on these actuator endpoints.
 - The codebase had inconsistent Spring Boot / Spring Cloud versions; they were normalized to Boot 3.x and Cloud 2023.x in the current working copy to avoid runtime ClassNotFound errors.
 - Actuator endpoints were added/exposed to allow health checks and Eureka detection.
 
-## Next steps (suggested)
-- Optional: add CI pipeline to build images and run integration tests.
-- Add proper database migrations (Flyway/Liquibase) for production use.
-
----
-
-If you want, I can:
-- Commit this `README.md` to the repository now.
-- Start `docker compose up --build` and stream logs while you watch.
-
-File created: `lab7/README.md`
